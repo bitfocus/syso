@@ -3,6 +3,7 @@
 package coff
 
 import (
+	"debug/pe"
 	"encoding/binary"
 	"errors"
 	"fmt"
@@ -69,6 +70,9 @@ func (f *File) SetArch(architechture string) error {
 	} else if architechture == "i386" {
 		f.arch = "i386"
 		f.machineType = _IMAGE_REL_I386_DIR32NB
+	} else if architechture == "arm" {
+		f.arch = "arm"
+		f.machineType = _IMAGE_REL_ARM_ADDR32NB
 	} else {
 		return fmt.Errorf("invalid architechture")
 	}
@@ -135,12 +139,21 @@ func (f *File) WriteTo(w io.Writer) (int64, error) {
 
 	f.freeze()
 
+	var fileMachine uint16 = pe.IMAGE_FILE_MACHINE_AMD64
+	if f.arch == "i386" {
+		fileMachine = pe.IMAGE_FILE_MACHINE_I386
+	} else if f.arch == "arm64" {
+		fileMachine = pe.IMAGE_FILE_MACHINE_ARM64
+	} else if f.arch == "arm" {
+		fileMachine = pe.IMAGE_FILE_MACHINE_ARM
+	}
 	n, err := common.BinaryWriteTo(w, &rawFileHeader{
-		Machine:              0x14c, // IMAGE_FILE_MACHINE_I386
+		Machine:              fileMachine, //0x14c, // IMAGE_FILE_MACHINE_I386
 		NumberOfSections:     uint16(len(f.sections)),
 		PointerToSymbolTable: f.symbolsOffset,
 		NumberOfSymbols:      uint32(len(f.sections)),
-		Characteristics:      0x0100, // IMAGE_FILE_32BIT_MACHINE
+		// https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#characteristics
+		Characteristics: pe.IMAGE_FILE_32BIT_MACHINE, // | pe.IMAGE_FILE_EXECUTABLE_IMAGE <-- deprecated
 	})
 	if err != nil {
 		return written, err

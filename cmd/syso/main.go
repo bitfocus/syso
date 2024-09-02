@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/bitfocus/syso"
 	"github.com/bitfocus/syso/pkg/coff"
@@ -21,13 +22,15 @@ func printErrorAndExit(format string, arg ...interface{}) {
 }
 
 func init() {
-	flag.StringVar(&arch, "arch", "amd64", "architecture")
+	flag.StringVar(&arch, "arch", "amd64", "architecture (amd64, i386, arm, arm64)")
 	flag.StringVar(&configFile, "c", "syso.json", "config file name")
-	flag.StringVar(&outFile, "o", "out.syso", "output file name")
+	flag.StringVar(&outFile, "o", "out_[arch].syso", "output file name")
 	flag.Parse()
 }
 
 func main() {
+	outFile = strings.Replace(outFile, "[arch]", arch, -1)
+
 	fcfg, err := os.Open(configFile)
 	if err != nil {
 		printErrorAndExit("failed to open config file: %v\n", err)
