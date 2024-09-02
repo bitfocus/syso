@@ -1,2 +1,4 @@
+github.com/bitfocus/syso v0.0.0-20240902090537-c1241c440df9 h1:/ABl4FaGL/JNgXAFcdoA4J2/7RSk+k0/VZbU5wwn3B8=
+github.com/bitfocus/syso v0.0.0-20240902090537-c1241c440df9/go.mod h1:1LM4hRNugaFh2IyGCRNTxjq4ccAs3ckOJ8E4V/LnBeU=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
