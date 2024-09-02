@@ -35,7 +35,7 @@ Other tools do not guarantee your resource to have same id across builds.
 ## Installation
 
 ```
-$ go get -u github.com/bitfocus/syso/...
+$ go install github.com/bitfocus/syso/cmd/syso@latest
 ```
 
 ## Usage
