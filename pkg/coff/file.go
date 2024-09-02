@@ -29,6 +29,8 @@ type rawFileHeader struct {
 
 // File is a COFF file.
 type File struct {
+	arch            string
+	machineType     uint16
 	sections        []*section
 	symbolsOffset   uint32
 	strings         []*_string
@@ -36,11 +38,41 @@ type File struct {
 	stringTableSize uint32
 }
 
+// Borrowed from akavel/rsrc
+const (
+	_IMAGE_REL_AMD64_ADDR32NB = 0x03
+	_IMAGE_REL_I386_DIR32NB   = 0x07
+	_IMAGE_REL_ARM64_ADDR32NB = 0x02
+	_IMAGE_REL_ARM_ADDR32NB   = 0x02
+)
+
 // New returns newly created COFF file.
 func New() *File {
 	return &File{
 		stringTable: make(map[string]*_string),
+		arch:        "amd64",
+		machineType: _IMAGE_REL_I386_DIR32NB,
 	}
+}
+
+func (f *File) Arch() string {
+	return f.arch
+}
+
+func (f *File) SetArch(architechture string) error {
+	if architechture == "amd64" {
+		f.arch = "amd64"
+		f.machineType = _IMAGE_REL_AMD64_ADDR32NB
+	} else if architechture == "arm64" {
+		f.arch = "arm64"
+		f.machineType = _IMAGE_REL_ARM64_ADDR32NB
+	} else if architechture == "i386" {
+		f.arch = "i386"
+		f.machineType = _IMAGE_REL_I386_DIR32NB
+	} else {
+		return fmt.Errorf("invalid architechture")
+	}
+	return nil
 }
 
 // AddSection adds section s to file.
@@ -149,7 +181,7 @@ func (f *File) WriteTo(w io.Writer) (int64, error) {
 			n, err := common.BinaryWriteTo(w, &rawRelocation{
 				VirtualAddress:   r.VirtualAddress(),
 				SymbolTableIndex: uint32(i),
-				Type:             0x0007, // IMAGE_REL_I386_DIR32NB
+				Type:             f.machineType, // IMAGE_REL_I386_DIR32NB, etc..
 			})
 			if err != nil {
 				return written, err
