@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hallazzang/syso"
-	"github.com/hallazzang/syso/pkg/coff"
+	"github.com/bitfocus/syso"
+	"github.com/bitfocus/syso/pkg/coff"
 )
 
 var (

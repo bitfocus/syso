@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/hallazzang/syso/pkg/common"
+	"github.com/bitfocus/syso/pkg/common"
 )
 
 // common errors

@@ -5,10 +5,10 @@ import (
 	"io"
 	"os"
 
-	"github.com/hallazzang/syso/pkg/coff"
-	"github.com/hallazzang/syso/pkg/common"
-	"github.com/hallazzang/syso/pkg/ico"
-	"github.com/hallazzang/syso/pkg/rsrc"
+	"github.com/bitfocus/syso/pkg/coff"
+	"github.com/bitfocus/syso/pkg/common"
+	"github.com/bitfocus/syso/pkg/ico"
+	"github.com/bitfocus/syso/pkg/rsrc"
 	"github.com/pkg/errors"
 )
 

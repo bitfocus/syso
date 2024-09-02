@@ -1,9 +1,7 @@
 # syso
 
-[![Build Status](https://travis-ci.org/hallazzang/syso.svg?branch=master)](https://travis-ci.org/hallazzang/syso)
-[![codecov](https://codecov.io/gh/hallazzang/syso/branch/master/graph/badge.svg)](https://codecov.io/gh/hallazzang/syso)
-[![godoc]](https://godoc.org/github.com/hallazzang/syso)
-[![goreportcard]](https://goreportcard.com/report/github.com/hallazzang/syso)
+[![godoc]](https://godoc.org/github.com/bitfocus/syso)
+[![goreportcard]](https://goreportcard.com/report/github.com/bitfocus/syso)
 
 **syso** - tool for embedding various type of resources in go Windows executable
 
@@ -13,6 +11,10 @@ Table of contents:
 - [Installation](#Installation)
 - [Usage](#Usage)
 - [License](#License)
+
+## Forked from hallazzang/syso
+
+This project is forked from [hallazzang/syso](https://github.com/hallazzang/syso) to support `go install xxxx` for installation of cli, as go get is deprecated.
 
 ## Features
 
@@ -33,7 +35,7 @@ Other tools do not guarantee your resource to have same id across builds.
 ## Installation
 
 ```
-$ go get -u github.com/hallazzang/syso/...
+$ go get -u github.com/bitfocus/syso/...
 ```
 
 ## Usage
@@ -208,7 +210,7 @@ You can use both `"companyName"` and `"CompanyName"`, or even `"companyname"` fo
 
 MIT
 
-[godoc]: https://godoc.org/github.com/hallazzang/syso?status.svg
-[goreportcard]: https://goreportcard.com/badge/github.com/hallazzang/syso
+[godoc]: https://godoc.org/github.com/bitfocus/syso?status.svg
+[goreportcard]: https://goreportcard.com/badge/github.com/bitfocus/syso
 [rsrc]: https://github.com/akavel/rsrc
 [goversioninfo]: https://github.com/josephspurrier/goversioninfo

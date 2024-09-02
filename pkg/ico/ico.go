@@ -6,7 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com/hallazzang/syso/pkg/common"
+	"github.com/bitfocus/syso/pkg/common"
 	"github.com/pkg/errors"
 )
 

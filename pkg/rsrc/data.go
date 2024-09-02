@@ -1,6 +1,6 @@
 package rsrc
 
-import "github.com/hallazzang/syso/pkg/common"
+import "github.com/bitfocus/syso/pkg/common"
 
 type rawDataEntry struct {
 	DataRVA  uint32
